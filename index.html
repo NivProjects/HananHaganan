@@ -1,0 +1,3095 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>חנן הגנן - ירקות טריים</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Tahoma', 'Arial', sans-serif;
+            background: #FAF8F4;
+            color: #444;
+            line-height: 1.6;
+            direction: rtl;
+            text-align: right;
+        }
+
+        .container {
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .top-navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            z-index: 1001;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .navbar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: nowrap;
+        }
+
+        .navbar-logo {
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #2F5D3A;
+            cursor: pointer;
+        }
+
+        .navbar-logo-photo {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background-color: #e8e8e8;
+            border: 2px solid #2F5D3A;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 10px;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .navbar-logo-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .navbar-tagline {
+            font-size: 12px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .top-nav {
+            display: flex;
+        }
+
+        .top-nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .top-nav a {
+            color: #2F5D3A;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 10px 18px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .top-nav a:hover, .top-nav a.active {
+            background-color: #2F5D3A;
+            color: white;
+        }
+
+        .header-background {
+            position: relative;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 50vh;
+            z-index: 999;
+            overflow: hidden;
+            margin-top: 75px;
+        }
+
+        .header-carousel {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .header-slide {
+            display: none;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .header-slide.active {
+            display: block;
+        }
+
+        .header-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(74, 103, 65, 0.7);
+            z-index: 1;
+        }
+
+        .header-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 2;
+        }
+
+        .header-logo {
+            font-size: 72px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .header-logo-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: #e8e8e8;
+            border: 4px solid white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 14px;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .header-logo-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .header-tagline {
+            font-size: 18px;
+            opacity: 0.9;
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+
+        .header-contact-btn {
+            background: #F4A300;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border: none;
+            box-shadow: 0 6px 20px rgba(244, 163, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-contact-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.8s;
+        }
+
+        .header-contact-btn:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 6px 20px rgba(244, 163, 0, 0.3);
+        }
+
+        .header-contact-btn:hover::before {
+            left: 100%;
+        }
+
+        .page {
+            display: none;
+            padding: 40px 0;
+            min-height: 500px;
+            margin-top: 40px;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .page-title {
+            font-size: 32px;
+            color: #2F5D3A;
+            margin-bottom: 40px;
+            text-align: center;
+            padding-bottom: 20px;
+            font-weight: 700;
+            position: relative;
+        }
+
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(1em * 0.25 * var(--title-length, 10));
+            height: 3px;
+            background: #F4A300;
+            border-radius: 2px;
+        }
+
+        .products-container {
+            width: 100%;
+            background: transparent;
+            padding: 30px 0;
+        }
+
+        .products-grid {
+            display: flex;
+            gap: 25px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 20px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+        }
+
+        .products-grid::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .products-grid::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .products-grid::-webkit-scrollbar-thumb {
+            background: #F4A300;
+            border-radius: 4px;
+        }
+
+        .products-grid::-webkit-scrollbar-thumb:hover {
+            background: #e6930a;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(74, 103, 65, 0.08);
+            border: 1px solid rgba(74, 103, 65, 0.1);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 400px;
+            min-width: 300px;
+            flex-shrink: 0;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ff8c42, #ffa726, #ffb74d);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 35px rgba(74, 103, 65, 0.15);
+        }
+
+        .product-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #f0f8f0, #e8f5e8);
+            border-radius: 12px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 14px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 2px 8px rgba(74, 103, 65, 0.1);
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .product-name {
+            font-size: 22px;
+            font-weight: 700;
+            color: #2F5D3A;
+            margin-bottom: 10px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .product-name::before {
+            font-size: 18px;
+        }
+
+        .product-description {
+            color: #666;
+            text-align: center;
+            margin-bottom: 15px;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-info-icon {
+            background: #F4A300;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            display: inline-block;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            width: fit-content;
+            padding-left: calc(16px * 1.15);
+            padding-right: calc(16px * 1.15);
+            height: auto;
+            line-height: 1.2;
+            margin: 0 auto;
+            border: none;
+            box-shadow: 0 4px 12px rgba(244, 163, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            align-self: center;
+            margin-top: auto;
+        }
+
+        .product-info-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .product-info-icon:hover {
+            transform: translateY(-2px) scale(1.1);
+            box-shadow: 0 6px 20px rgba(255, 140, 66, 0.4);
+        }
+
+        .product-info-icon:hover::before {
+            left: 100%;
+        }
+
+        .product-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .product-modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s;
+        }
+
+        .modal-close:hover {
+            color: #4a6741;
+        }
+
+        .modal-title {
+            color: #4a6741;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .modal-image {
+            width: 60%;
+            height: 150px;
+            background-color: #e8e8e8;
+            border-radius: 12px;
+            margin: 0 auto 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 14px;
+            border: 2px dashed #ccc;
+            overflow: hidden;
+        }
+
+        .modal-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .modal-description {
+            color: #555;
+            line-height: 1.6;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        /* Modern Contact Page Styles */
+        .modern-contact-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            margin-bottom: 50px;
+            padding: 0 20px;
+        }
+
+        .modern-contact-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(74, 103, 65, 0.1);
+            border: 1px solid rgba(74, 103, 65, 0.08);
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .modern-contact-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(74, 103, 65, 0.2);
+            z-index: 10;
+        }
+
+        .contact-icon {
+            color: #F4A300;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .contact-icon svg {
+            width: 48px;
+            height: 48px;
+            stroke-width: 1.5;
+        }
+
+        .modern-contact-card h3 {
+            color: #2F5D3A;
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .contact-main {
+            color: #4a6741;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .contact-main a {
+            color: #4a6741;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-main a:hover {
+            color: #ff8c42;
+        }
+
+        .contact-sub {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* Address and Map Section */
+        .address-map-section {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 40px;
+            margin: 50px 0;
+            padding: 0 20px;
+        }
+
+        .address-card {
+            background: linear-gradient(135deg, #4a6741 0%, #5a7851 50%, #6b8e5a 100%);
+            padding: 45px;
+            border-radius: 24px;
+            color: white;
+            box-shadow: 0 15px 40px rgba(74, 103, 65, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .address-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .address-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 35px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .address-icon {
+            background: #F4A300;
+            padding: 16px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(244, 163, 0, 0.3);
+        }
+
+        .address-icon svg {
+            width: 32px;
+            height: 32px;
+            stroke: white;
+            stroke-width: 2;
+        }
+
+        .address-card h3 {
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: -0.5px;
+        }
+
+        .address-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .address-main {
+            font-size: 20px;
+            margin-bottom: 12px;
+            font-weight: 500;
+            line-height: 1.4;
+            opacity: 0.95;
+        }
+
+        .address-divider {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            margin: 25px 0;
+        }
+
+        .directions-section {
+            margin-top: 35px;
+        }
+
+        .directions-section h4 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+        }
+
+        .directions-section h4 svg {
+            width: 24px;
+            height: 24px;
+            stroke: #F4A300;
+            stroke-width: 2;
+        }
+
+        .directions-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .directions-list li {
+            padding: 12px 0;
+            padding-right: 35px;
+            position: relative;
+            line-height: 1.6;
+            font-size: 16px;
+            opacity: 0.9;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .directions-list li:last-child {
+            border-bottom: none;
+        }
+
+        .directions-list li::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            background: #F4A300;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .directions-list li::after {
+            content: '←';
+            position: absolute;
+            right: 6px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .map-container-modern {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            height: 400px;
+        }
+
+        /* Order Section */
+        .order-section {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(74, 103, 65, 0.1);
+            margin: 50px 20px 0;
+            text-align: center;
+        }
+
+        .order-section h3 {
+            color: #2d5016;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .order-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(1em * 0.25 * var(--title-length, 6));
+            height: 3px;
+            background: linear-gradient(90deg, #ff8c42, #ffa726);
+            border-radius: 2px;
+        }
+
+        .order-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .order-step {
+            padding: 25px;
+            background: linear-gradient(135deg, #f8f9fa, #ffffff);
+            border-radius: 16px;
+            border: 2px solid rgba(74, 103, 65, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .order-step:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(74, 103, 65, 0.2);
+            box-shadow: 0 20px 50px rgba(74, 103, 65, 0.2);
+            z-index: 10;
+        }
+
+        .step-icon {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+
+        .order-step h4 {
+            color: #2F5D3A;
+            font-size: 18px;
+            font-weight: 600;
+            margin: 15px 0 10px 0;
+        }
+
+        .order-step p {
+            color: #555;
+            line-height: 1.6;
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .availability-note {
+            color: #888;
+            font-style: italic;
+            font-size: 14px;
+            margin: 0;
+            padding: 20px;
+            background: rgba(74, 103, 65, 0.05);
+            border-radius: 12px;
+            border-right: 4px solid #ff8c42;
+        }
+
+        .about-content {
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(74, 103, 65, 0.1);
+            line-height: 1.8;
+            border: 1px solid rgba(74, 103, 65, 0.08);
+        }
+
+        .about-intro-section {
+            display: flex;
+            gap: 50px;
+            align-items: flex-start;
+        }
+
+        .about-intro-image {
+            flex: 0 0 33.333%;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(74, 103, 65, 0.15);
+            position: relative;
+        }
+
+        .about-intro-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(74, 103, 65, 0.1), transparent);
+            z-index: 1;
+        }
+
+        .about-intro-image img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .about-intro-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .about-intro-text {
+            flex: 1;
+        }
+
+        .about-content h3 {
+            color: #2d5016;
+            margin: 30px 0 20px 0;
+            font-size: 24px;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 20px;
+            text-align: center;
+        }
+
+        .about-content h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(1em * 0.25 * var(--title-length, 8));
+            height: 3px;
+            background: linear-gradient(90deg, #ff8c42, #ffa726);
+            border-radius: 2px;
+        }
+
+        .about-content p {
+            margin-bottom: 25px;
+            color: #555;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .about-divider {
+            display: flex;
+            align-items: center;
+            margin: 50px 0;
+            gap: 20px;
+        }
+
+        .divider-line {
+            flex: 1;
+            height: 6px;
+            background: linear-gradient(90deg, transparent 0%, #4a6741 20%, #6b8e5a 50%, #4a6741 80%, transparent 100%);
+            border-radius: 3px;
+        }
+
+        .divider-text {
+            background-color: #4a6741;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 300;
+            font-size: 18px;
+            white-space: nowrap;
+            box-shadow: 0 4px 12px rgba(74, 103, 65, 0.3);
+        }
+
+        .about-image-section {
+            background: linear-gradient(rgba(74, 103, 65, 0.8), rgba(107, 142, 90, 0.8)), url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1200&h=800&fit=crop');
+            background-size: cover;
+            background-position: center;
+            border-radius: 0;
+            margin: 0 calc(-50vw + 50%) 0 calc(-50vw + 50%);
+            width: 100vw;
+            max-width: 100vw;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .about-image-content {
+            padding: 60px 40px;
+            color: white;
+        }
+
+        .about-image-content h3 {
+            color: #4a6741;
+            font-size: 28px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 35px;
+            margin-bottom: 60px;
+        }
+
+        .value-item {
+            background: white;
+            padding: 35px 25px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid rgba(74, 103, 65, 0.1);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 8px 25px rgba(74, 103, 65, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff8c42, #ffa726);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .value-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(74, 103, 65, 0.15);
+            border-color: rgba(255, 140, 66, 0.3);
+        }
+
+        .value-item:hover::before {
+            transform: scaleX(1);
+        }
+
+        .value-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .value-item h4 {
+            color: #2d5016;
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 18px;
+        }
+
+        .value-item p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 15px;
+        }
+
+        .visit-invitation {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .visit-invitation h3 {
+            color: white;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .visit-invitation p {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        .visit-section {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        .image-montage {
+            flex: 0 0 40%;
+            position: relative;
+            height: 300px;
+        }
+
+        .montage-image {
+            position: absolute;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border: 3px solid white;
+        }
+
+        .montage-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .main-image {
+            width: 200px;
+            height: 150px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 3;
+        }
+
+        .small-image {
+            width: 100px;
+            height: 75px;
+            z-index: 2;
+        }
+
+        .top-right {
+            top: 20px;
+            right: 10px;
+        }
+
+        .bottom-left {
+            bottom: 20px;
+            left: 10px;
+        }
+
+        .bottom-right {
+            bottom: 20px;
+            right: 10px;
+        }
+
+        .center-overlay {
+            width: 80px;
+            height: 60px;
+            top: 30px;
+            left: 30px;
+            z-index: 4;
+            border: 2px solid #4a6741;
+        }
+
+        .visit-text {
+            flex: 1;
+        }
+
+        .about-content-full-width {
+            background: white;
+            padding: 60px 40px;
+            border-radius: 0;
+            box-shadow: 0 8px 30px rgba(74, 103, 65, 0.1);
+            line-height: 1.8;
+            margin: 0 calc(-50vw + 50%) 0 calc(-50vw + 50%);
+            width: 100vw;
+            max-width: 100vw;
+            border-top: 1px solid rgba(74, 103, 65, 0.1);
+            border-bottom: 1px solid rgba(74, 103, 65, 0.1);
+        }
+
+        .visit-text h3 {
+            color: #4a6741;
+            margin-bottom: 30px;
+            font-size: 24px;
+            position: relative;
+            padding-bottom: 10px;
+            text-align: center;
+        }
+
+        .visit-text h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(1em * 0.25 * var(--title-length, 8));
+            height: 3px;
+            background: linear-gradient(90deg, #ff8c42, #ffa726);
+            border-radius: 2px;
+        }
+
+        .no-underline::after {
+            display: none !important;
+        }
+
+        .visit-text p {
+            margin-bottom: 15px;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 100vw;
+            max-width: 100vw;
+            margin: 0 calc(-50vw + 50%) 0 calc(-50vw + 50%);
+            background: white;
+            border-radius: 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+            padding: 0;
+        }
+
+        .carousel {
+            position: relative;
+            width: 100%;
+            height: 400px;
+        }
+
+        .carousel-slide {
+            display: none;
+            width: 100%;
+            height: 100%;
+        }
+
+        .carousel-slide.active {
+            display: block;
+        }
+
+        .carousel-image {
+            width: 100%;
+            height: 100%;
+            background-color: #e8e8e8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 16px;
+            border: 2px dashed #ccc;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carousel-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(74, 103, 65, 0.8);
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            z-index: 10;
+        }
+
+        .carousel-btn:hover {
+            background-color: rgba(74, 103, 65, 1);
+        }
+
+        .carousel-btn.prev {
+            left: 15px;
+        }
+
+        .carousel-btn.next {
+            right: 15px;
+        }
+
+        .full-page-carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #4a6741, #6b8e5a);
+            color: white;
+            border: none;
+            padding: 0;
+            font-size: 20px;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: 10;
+            box-shadow: 0 6px 20px rgba(74, 103, 65, 0.3);
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .full-page-carousel-btn:hover {
+            background: linear-gradient(135deg, #ff8c42, #ffa726);
+            transform: translateY(-50%) scale(1.15);
+            box-shadow: 0 8px 25px rgba(255, 140, 66, 0.4);
+        }
+
+        .full-page-carousel-btn.prev {
+            left: 20px;
+        }
+
+        .full-page-carousel-btn.next {
+            right: 20px;
+        }
+
+        .carousel-dots {
+            text-align: center;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        .dot {
+            height: 15px;
+            width: 15px;
+            margin: 0 5px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .dot.active, .dot:hover {
+            background-color: #4a6741;
+        }
+
+        .page-carousel-dots {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 40px;
+        }
+
+        .page-dot {
+            height: 16px;
+            width: 16px;
+            margin: 0 8px;
+            background-color: #ccc;
+            border-radius: 50%;
+            display: inline-block;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            opacity: 0.7;
+        }
+
+        .page-dot.active {
+            background-color: #4a6741;
+            border-color: #4a6741;
+            transform: scale(1.3);
+            opacity: 1;
+        }
+
+        .page-dot:hover {
+            background-color: #6b8e5a;
+            transform: scale(1.15);
+            opacity: 0.9;
+        }
+
+        /* Want More Section Styles */
+        .want-more-section {
+            margin: 50px 0;
+            padding: 0 20px;
+        }
+
+        .want-more-card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(74, 103, 65, 0.1);
+            border: 1px solid rgba(74, 103, 65, 0.08);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .want-more-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(74, 103, 65, 0.15);
+        }
+
+        .want-more-card h3 {
+            color: #2F5D3A;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .want-more-card p {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .contact-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .contact-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 25px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .email-btn {
+            background: #2F5D3A;
+            color: white;
+        }
+
+        .email-btn:hover {
+            background: #1e3d24;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(47, 93, 58, 0.3);
+        }
+
+        .phone-btn {
+            background: #F4A300;
+            color: white;
+        }
+
+        .phone-btn:hover {
+            background: #e6930a;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(244, 163, 0, 0.3);
+        }
+
+        footer {
+            background-color: #2d3e2d;
+            color: white;
+            padding: 25px 0;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-image-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .footer-image {
+            width: 60px;
+            height: 40px;
+            background-color: #e8e8e8;
+            border-radius: 6px;
+            border: 2px solid rgba(255,255,255,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 10px;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .footer-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .footer-text {
+            flex: 1;
+            text-align: right;
+        }
+
+        .footer-divider {
+            width: 2px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.3);
+            margin: 0 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex: 1;
+            justify-content: flex-start;
+        }
+
+        .footer-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+            font-size: 14px;
+        }
+
+        .footer-link:hover {
+            opacity: 0.8;
+        }
+
+        .footer-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                text-align: center;
+                gap: 5px;
+                flex-wrap: nowrap;
+            }
+            
+            .footer-divider {
+                width: 1px;
+                height: 25px;
+                margin: 0 5px;
+                flex-shrink: 0;
+            }
+            
+            .footer-links {
+                justify-content: flex-start;
+                gap: 8px;
+                flex: 0 0 auto;
+                flex-wrap: nowrap;
+            }
+            
+            .footer-link {
+                font-size: 10px;
+                gap: 3px;
+                white-space: nowrap;
+            }
+            
+            .footer-icon {
+                width: 16px;
+                height: 16px;
+            }
+            
+            .footer-image-section {
+                justify-content: flex-start;
+                flex: 0 0 auto;
+            }
+            
+            .footer-image {
+                width: 35px;
+                height: 25px;
+            }
+            
+            .footer-text {
+                flex: 1;
+                font-size: 10px;
+                min-width: 0;
+                overflow: hidden;
+            }
+            
+            .footer-text p {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+
+        /* Mobile Responsive Design - All Devices */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 10px;
+            }
+
+            /* Top Navbar Mobile - Fixed Proportions */
+            .navbar-content {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                gap: 4px;
+                padding: 0 8px;
+            }
+
+            .navbar-logo {
+                font-size: 14px;
+                flex-shrink: 0;
+                min-width: 0;
+                gap: 6px;
+            }
+
+            .navbar-logo-photo {
+                width: 30px;
+                height: 30px;
+                flex-shrink: 0;
+            }
+
+            .navbar-tagline {
+                font-size: 8px;
+                line-height: 1.1;
+            }
+
+            .top-nav {
+                flex-shrink: 1;
+                min-width: 0;
+                overflow: hidden;
+            }
+
+            .top-nav ul {
+                gap: 1px;
+                flex-wrap: nowrap;
+                margin: 0;
+                padding: 0;
+                justify-content: flex-end;
+            }
+
+            .top-nav a {
+                font-size: 8px;
+                padding: 3px 4px;
+                white-space: nowrap;
+                border-radius: 4px;
+                min-width: 0;
+                line-height: 1;
+                height: auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                flex-direction: column;
+                gap: 1px;
+            }
+
+            .top-nav a svg {
+                width: 12px;
+                height: 12px;
+                flex-shrink: 0;
+            }
+
+            /* Show only icons on very small screens */
+            @media (max-width: 400px) {
+                .top-nav ul {
+                    gap: 2px;
+                }
+                
+                .top-nav a {
+                    padding: 8px 6px;
+                    flex-direction: column;
+                    gap: 0;
+                    min-width: 40px;
+                    font-size: 0;
+                }
+                
+                .top-nav a .nav-text-short,
+                .top-nav a .nav-text-full {
+                    display: none !important;
+                }
+                
+                .top-nav a svg {
+                    width: 18px;
+                    height: 18px;
+                }
+            }
+
+            /* Medium small screens - shorter text */
+            @media (min-width: 401px) and (max-width: 500px) {
+                .top-nav a .nav-text-short {
+                    display: inline;
+                }
+                
+                .top-nav a .nav-text-full {
+                    display: none;
+                }
+            }
+
+            /* Larger screens - full text */
+            @media (min-width: 501px) {
+                .top-nav a .nav-text-short {
+                    display: none;
+                }
+                
+                .top-nav a .nav-text-full {
+                    display: inline;
+                }
+            }
+
+            /* Header Content Mobile - Fixed Proportions */
+            .header-logo {
+                font-size: clamp(32px, 8vw, 48px);
+                gap: clamp(12px, 3vw, 20px);
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .header-logo-photo {
+                width: clamp(70px, 15vw, 100px);
+                height: clamp(70px, 15vw, 100px);
+                flex-shrink: 0;
+            }
+
+            .header-tagline {
+                font-size: 14px;
+                margin-bottom: 20px;
+                text-align: center;
+                line-height: 1.3;
+            }
+
+            .header-contact-btn {
+                padding: 12px 24px;
+                font-size: 16px;
+            }
+
+            /* Page Title Responsive */
+            .page-title {
+                font-size: clamp(18px, 5vw, 22px);
+                margin-bottom: clamp(20px, 5vw, 30px);
+            }
+
+            .page-title::before,
+            .page-title::after {
+                flex: 0 0 clamp(20px, 10vw, 50px);
+            }
+
+            /* Products Grid - Perfect Responsive */
+            .products-container {
+                padding: clamp(15px, 4vw, 30px);
+            }
+
+            .products-grid {
+                flex-direction: row;
+                gap: clamp(8px, 3vw, 15px);
+                width: 100%;
+                margin: 0 auto;
+                overflow-x: auto;
+            }
+
+            .product-card {
+                padding: 12px;
+                display: flex;
+                flex-direction: column;
+                height: 280px;
+                min-width: 220px;
+                flex-shrink: 0;
+                justify-content: space-between;
+            }
+
+            .product-image {
+                height: 120px;
+                flex-shrink: 0;
+                margin-bottom: 8px;
+                border-radius: 8px;
+            }
+            
+            .product-name {
+                font-size: 14px;
+                margin-bottom: 6px;
+                flex-shrink: 0;
+                line-height: 1.2;
+            }
+            
+            .product-description {
+                font-size: 11px;
+                margin-bottom: 8px;
+                flex-grow: 1;
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                line-height: 1.3;
+                text-align: center;
+            }
+            
+            .product-info-icon {
+                padding: 6px 12px;
+                font-size: 11px;
+                font-weight: 600;
+                width: auto;
+                height: auto;
+                line-height: 1.2;
+                flex-shrink: 0;
+                margin-top: auto;
+                border: none;
+                border-radius: 12px;
+                align-self: center;
+            }
+
+            /* Contact Section Responsive */
+            .modern-contact-grid {
+                grid-template-columns: repeat(auto-fit, minmax(clamp(250px, 80vw, 300px), 1fr));
+                gap: clamp(15px, 4vw, 20px);
+                padding: 0 clamp(10px, 3vw, 15px);
+            }
+
+            .modern-contact-card {
+                padding: clamp(20px, 5vw, 25px);
+            }
+
+            .contact-icon {
+                font-size: clamp(32px, 8vw, 40px);
+                margin-bottom: clamp(15px, 4vw, 18px);
+            }
+
+            .modern-contact-card h3 {
+                font-size: clamp(16px, 4vw, 20px);
+                margin-bottom: clamp(10px, 3vw, 12px);
+            }
+
+            .contact-main {
+                font-size: clamp(14px, 3.5vw, 16px);
+                margin-bottom: clamp(8px, 2vw, 10px);
+            }
+
+            .contact-sub {
+                font-size: clamp(12px, 3vw, 14px);
+            }
+
+            /* Address and Map Section Responsive */
+            .address-map-section {
+                grid-template-columns: 1fr;
+                gap: clamp(20px, 5vw, 30px);
+                padding: 0 clamp(10px, 3vw, 15px);
+            }
+
+            .address-card {
+                padding: clamp(30px, 8vw, 45px);
+            }
+
+            .address-icon svg {
+                width: clamp(24px, 6vw, 32px);
+                height: clamp(24px, 6vw, 32px);
+            }
+
+            .address-card h3 {
+                font-size: clamp(20px, 6vw, 28px);
+            }
+
+            .address-main {
+                font-size: clamp(16px, 4vw, 20px);
+            }
+
+            .directions-section h4 {
+                font-size: clamp(16px, 4vw, 20px);
+            }
+
+            .directions-section h4 svg {
+                width: clamp(18px, 4vw, 24px);
+                height: clamp(18px, 4vw, 24px);
+            }
+
+            .directions-list li {
+                font-size: clamp(14px, 3.5vw, 16px);
+            }
+
+            .map-container-modern {
+                height: clamp(250px, 60vw, 350px);
+            }
+
+            /* Order Section Responsive */
+            .order-section {
+                padding: clamp(25px, 6vw, 35px);
+                margin: clamp(30px, 8vw, 40px) clamp(10px, 3vw, 15px) 0;
+            }
+
+            .order-section h3 {
+                font-size: clamp(20px, 6vw, 24px);
+                margin-bottom: clamp(20px, 5vw, 25px);
+            }
+
+            .order-steps {
+                grid-template-columns: 1fr;
+                gap: clamp(15px, 4vw, 20px);
+            }
+
+            .order-step {
+                padding: clamp(15px, 4vw, 20px);
+            }
+
+            .step-icon {
+                font-size: clamp(24px, 6vw, 30px);
+                margin-bottom: clamp(10px, 3vw, 12px);
+            }
+
+            .order-step p {
+                font-size: clamp(13px, 3.5vw, 15px);
+            }
+
+            .availability-note {
+                font-size: clamp(11px, 3vw, 13px);
+                padding: clamp(15px, 4vw, 18px);
+            }
+
+            /* About Section Responsive */
+            .about-intro-section {
+                flex-direction: column;
+                gap: clamp(15px, 5vw, 25px);
+            }
+
+            .about-intro-image {
+                flex: none;
+                width: 100%;
+            }
+
+            .about-intro-image img {
+                height: clamp(200px, 50vw, 300px);
+            }
+
+            .values-grid {
+                grid-template-columns: repeat(auto-fit, minmax(clamp(200px, 80vw, 300px), 1fr));
+                gap: clamp(15px, 4vw, 20px);
+            }
+
+            .value-item {
+                padding: clamp(15px, 4vw, 20px);
+                min-height: clamp(120px, 30vw, 160px);
+            }
+
+            .value-icon {
+                font-size: clamp(24px, 8vw, 40px);
+            }
+
+            .value-item h4 {
+                font-size: clamp(16px, 4vw, 20px);
+            }
+
+            .value-item p {
+                font-size: clamp(12px, 3vw, 14px);
+            }
+
+            /* Values and Customer Section Styles */
+            .about-values-section {
+                background: white;
+                padding: 60px 40px;
+                border-radius: 0;
+                box-shadow: 0 8px 30px rgba(74, 103, 65, 0.1);
+                margin: 0 calc(-50vw + 50%) 0 calc(-50vw + 50%);
+                width: 100vw;
+                max-width: 100vw;
+                border-top: 1px solid rgba(74, 103, 65, 0.1);
+                border-bottom: 1px solid rgba(74, 103, 65, 0.1);
+            }
+
+            .values-customer-container {
+                display: flex;
+                min-height: 500px;
+                gap: 0;
+                align-items: stretch;
+            }
+
+            .values-half {
+                flex: 1;
+                padding: 60px 40px;
+                background: white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .values-vertical {
+                display: flex;
+                flex-direction: column;
+                gap: 60px;
+                width: 100%;
+                max-width: 400px;
+            }
+
+            .value-item-large {
+                background: white;
+                padding: 50px 40px;
+                border-radius: 20px;
+                text-align: center;
+                border: 2px solid rgba(74, 103, 65, 0.1);
+                transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                box-shadow: 0 8px 30px rgba(74, 103, 65, 0.1);
+                position: relative;
+                overflow: hidden;
+            }
+
+            .value-item-large::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 4px;
+                background: linear-gradient(90deg, #ff8c42, #ffa726);
+                transform: scaleX(0);
+                transition: transform 0.3s ease;
+            }
+
+            .value-item-large:hover {
+                transform: translateY(-10px) scale(1.02);
+                box-shadow: 0 20px 50px rgba(74, 103, 65, 0.2);
+                border-color: rgba(255, 140, 66, 0.3);
+            }
+
+            .value-item-large:hover::before {
+                transform: scaleX(1);
+            }
+
+            .value-item-large .value-icon {
+                font-size: 56px;
+                margin-bottom: 25px;
+                display: block;
+            }
+
+            .value-item-large h4 {
+                color: #2d5016;
+                font-size: 26px;
+                font-weight: 600;
+                margin-bottom: 20px;
+            }
+
+            .value-item-large p {
+                color: #666;
+                line-height: 1.6;
+                font-size: 16px;
+            }
+
+            .vertical-divider {
+                width: 4px;
+                background: linear-gradient(to bottom, transparent, #4a6741, #6b8e5a, #4a6741, transparent);
+                margin: 40px 0;
+                flex-shrink: 0;
+            }
+
+            .customer-half {
+                flex: 1;
+                padding: 60px 40px;
+                background: linear-gradient(135deg, #4a6741, #6b8e5a);
+                color: white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .customer-satisfaction {
+                text-align: center;
+                width: 100%;
+                max-width: 400px;
+            }
+
+            .customer-satisfaction h3 {
+                color: white;
+                font-size: 28px;
+                font-weight: 600;
+                margin-bottom: 30px;
+            }
+
+            .customer-number {
+                font-size: 72px;
+                font-weight: bold;
+                color: #F4A300;
+                margin-bottom: 20px;
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            }
+
+            .customer-satisfaction p {
+                color: rgba(255, 255, 255, 0.9);
+                font-size: 18px;
+                line-height: 1.6;
+                margin-bottom: 40px;
+            }
+
+            .satisfaction-stats {
+                display: flex;
+                justify-content: space-around;
+                gap: 30px;
+            }
+
+            .stat-item {
+                text-align: center;
+            }
+
+            .stat-number {
+                font-size: 36px;
+                font-weight: bold;
+                color: #F4A300;
+                display: block;
+                margin-bottom: 8px;
+            }
+
+            .stat-label {
+                font-size: 14px;
+                color: rgba(255, 255, 255, 0.8);
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+
+            /* New About Page Mobile Styles */
+            .about-values-section {
+                padding: clamp(30px, 8vw, 60px) clamp(15px, 4vw, 40px);
+            }
+
+            .values-customer-container {
+                flex-direction: column;
+                min-height: auto;
+                gap: 30px;
+            }
+
+            .values-half {
+                padding: clamp(20px, 5vw, 40px);
+            }
+
+            .values-vertical {
+                gap: clamp(20px, 5vw, 40px);
+            }
+
+            .value-item-large {
+                padding: clamp(25px, 6vw, 40px) clamp(20px, 5vw, 30px);
+            }
+
+            .value-item-large .value-icon {
+                font-size: clamp(40px, 10vw, 56px);
+                margin-bottom: clamp(15px, 4vw, 25px);
+            }
+
+            .value-item-large h4 {
+                font-size: clamp(20px, 5vw, 26px);
+                margin-bottom: clamp(15px, 4vw, 20px);
+            }
+
+            .value-item-large p {
+                font-size: clamp(14px, 3.5vw, 16px);
+            }
+
+            .vertical-divider {
+                width: 100%;
+                height: 3px;
+                background: linear-gradient(to right, transparent, #4a6741, #6b8e5a, #4a6741, transparent);
+                margin: 0;
+            }
+
+            .customer-half {
+                padding: clamp(30px, 8vw, 40px);
+            }
+
+            .customer-satisfaction h3 {
+                font-size: clamp(22px, 6vw, 28px);
+                margin-bottom: clamp(20px, 5vw, 30px);
+            }
+
+            .customer-number {
+                font-size: clamp(48px, 15vw, 72px);
+                margin-bottom: clamp(15px, 4vw, 20px);
+            }
+
+            .customer-satisfaction p {
+                font-size: clamp(16px, 4vw, 18px);
+                margin-bottom: clamp(30px, 8vw, 40px);
+            }
+
+            .satisfaction-stats {
+                flex-direction: column;
+                gap: clamp(15px, 4vw, 30px);
+            }
+
+            .stat-number {
+                font-size: clamp(28px, 8vw, 36px);
+            }
+
+            .stat-label {
+                font-size: clamp(12px, 3vw, 14px);
+            }
+
+
+
+            /* Farm Images Section Styles */
+            .farm-images-section {
+                background: white;
+                padding: 60px 40px;
+                border-radius: 0;
+                margin: 0 calc(-50vw + 50%) 50px calc(-50vw + 50%);
+                width: 100vw;
+                max-width: 100vw;
+                border-top: 1px solid rgba(74, 103, 65, 0.1);
+                border-bottom: 1px solid rgba(74, 103, 65, 0.1);
+            }
+
+            .farm-images-container {
+                max-width: 1200px;
+                margin: 0 auto;
+                text-align: center;
+            }
+
+            .farm-images-title {
+                color: #2F5D3A;
+                font-size: 32px;
+                font-weight: 700;
+                margin-bottom: 15px;
+            }
+
+            .farm-images-subtitle {
+                color: #666;
+                font-size: 18px;
+                line-height: 1.6;
+                margin-bottom: 50px;
+                max-width: 600px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .farm-images-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 30px;
+            }
+
+            .farm-image-card {
+                border-radius: 20px;
+                overflow: hidden;
+                box-shadow: 0 10px 30px rgba(74, 103, 65, 0.15);
+                transition: all 0.3s ease;
+                position: relative;
+            }
+
+            .farm-image-card::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: linear-gradient(45deg, rgba(74, 103, 65, 0.1), transparent);
+                z-index: 1;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+
+            .farm-image-card:hover {
+                transform: translateY(-10px) scale(1.02);
+                box-shadow: 0 20px 50px rgba(74, 103, 65, 0.25);
+            }
+
+            .farm-image-card:hover::before {
+                opacity: 1;
+            }
+
+            .farm-image-card img {
+                width: 100%;
+                height: 250px;
+                object-fit: cover;
+                transition: transform 0.3s ease;
+            }
+
+            .farm-image-card:hover img {
+                transform: scale(1.05);
+            }
+
+            /* Mobile Responsive for New Sections */
+            @media (max-width: 768px) {
+
+
+                .farm-images-section {
+                    padding: clamp(30px, 8vw, 60px) clamp(15px, 4vw, 40px);
+                }
+
+                .farm-images-title {
+                    font-size: clamp(24px, 6vw, 32px);
+                    margin-bottom: clamp(10px, 3vw, 15px);
+                }
+
+                .farm-images-subtitle {
+                    font-size: clamp(16px, 4vw, 18px);
+                    margin-bottom: clamp(30px, 8vw, 50px);
+                }
+
+                .farm-images-grid {
+                    grid-template-columns: 1fr;
+                    gap: clamp(20px, 5vw, 30px);
+                }
+
+                .farm-image-card img {
+                    height: clamp(200px, 50vw, 250px);
+                }
+            }
+
+            /* Extra Small Mobile */
+            @media (max-width: 480px) {
+            }
+
+
+
+            /* Visit Section Responsive */
+            .visit-section {
+                flex-direction: column;
+                gap: clamp(15px, 5vw, 25px);
+            }
+
+            .image-montage {
+                flex: none;
+                height: clamp(200px, 50vw, 250px);
+                width: 100%;
+                position: relative;
+            }
+
+            .main-image {
+                width: clamp(120px, 35vw, 160px);
+                height: clamp(90px, 26vw, 120px);
+            }
+
+            .small-image {
+                width: clamp(60px, 18vw, 80px);
+                height: clamp(45px, 13vw, 60px);
+            }
+
+            .center-overlay {
+                width: clamp(45px, 13vw, 60px);
+                height: clamp(34px, 10vw, 45px);
+            }
+
+            /* Carousel Responsive */
+            .carousel {
+                height: clamp(200px, 50vw, 300px);
+            }
+
+            .carousel-btn, .full-page-carousel-btn {
+                padding: clamp(8px, 2vw, 10px) clamp(12px, 3vw, 15px);
+                font-size: clamp(14px, 4vw, 16px);
+            }
+
+            .full-page-carousel-btn.prev {
+                left: clamp(5px, 2vw, 10px);
+            }
+
+            .full-page-carousel-btn.next {
+                right: clamp(5px, 2vw, 10px);
+            }
+
+            /* Modal Responsive */
+            .product-modal-content {
+                margin: 5% auto;
+                padding: clamp(15px, 4vw, 20px);
+                width: clamp(90%, 95vw, 95%);
+                max-width: 500px;
+            }
+
+            .modal-image {
+                height: clamp(120px, 30vw, 150px);
+            }
+
+            .modal-title {
+                font-size: clamp(18px, 5vw, 24px);
+            }
+
+            .modal-description {
+                font-size: clamp(13px, 3.5vw, 16px);
+            }
+
+            /* Footer Stays Horizontal */
+            .footer-content {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                text-align: center;
+                gap: clamp(3px, 1vw, 5px);
+                flex-wrap: nowrap;
+            }
+            
+            .footer-divider {
+                width: 1px;
+                height: clamp(20px, 5vw, 25px);
+                margin: 0 clamp(3px, 1vw, 5px);
+                flex-shrink: 0;
+            }
+            
+            .footer-links {
+                justify-content: flex-start;
+                gap: clamp(5px, 2vw, 8px);
+                flex: 0 0 auto;
+                flex-wrap: nowrap;
+            }
+            
+            .footer-link {
+                font-size: clamp(8px, 2.5vw, 10px);
+                gap: clamp(2px, 1vw, 3px);
+                white-space: nowrap;
+            }
+            
+            .footer-icon {
+                width: clamp(12px, 4vw, 16px);
+                height: clamp(12px, 4vw, 16px);
+            }
+            
+            .footer-image-section {
+                justify-content: flex-start;
+                flex: 0 0 auto;
+            }
+            
+            .footer-image {
+                width: clamp(25px, 8vw, 35px);
+                height: clamp(18px, 6vw, 25px);
+                font-size: clamp(6px, 2vw, 8px);
+            }
+            
+            .footer-text {
+                flex: 1;
+                font-size: clamp(8px, 2.5vw, 10px);
+                min-width: 0;
+                overflow: hidden;
+            }
+            
+            .footer-text p {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                margin: 0;
+            }
+
+            /* Full Width Sections Responsive */
+            .contact-section-full-width {
+                padding: clamp(20px, 5vw, 25px) clamp(15px, 4vw, 20px);
+            }
+
+            .about-content-full-width {
+                padding: clamp(20px, 5vw, 25px) clamp(15px, 4vw, 20px);
+            }
+
+            .about-image-content {
+                padding: clamp(30px, 8vw, 40px) clamp(15px, 4vw, 20px);
+            }
+
+            /* Text Responsive Sizing */
+            p {
+                font-size: clamp(12px, 3.5vw, 16px);
+                line-height: 1.4;
+            }
+
+            h3 {
+                font-size: clamp(16px, 5vw, 22px);
+            }
+
+            h4 {
+                font-size: clamp(14px, 4vw, 18px);
+            }
+        }
+
+        /* Extra Small Devices */
+        @media (max-width: 480px) {
+            .navbar-content {
+                gap: 4px;
+                padding: 0 5px;
+            }
+
+            .navbar-logo {
+                font-size: 14px;
+            }
+
+            .navbar-logo-photo {
+                width: 30px;
+                height: 30px;
+            }
+
+            .navbar-tagline {
+                font-size: 8px;
+            }
+
+            .top-nav a {
+                font-size: 10px;
+                padding: 5px 6px;
+            }
+
+            .header-logo {
+                font-size: 24px;
+                gap: 10px;
+            }
+
+            .header-logo-photo {
+                width: 50px;
+                height: 50px;
+            }
+
+            .header-tagline {
+                font-size: 12px;
+            }
+
+            .header-contact-btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: clamp(6px, 2vw, 10px);
+            }
+
+            .product-card {
+                min-height: clamp(160px, 50vw, 220px);
+            }
+
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Large Mobile Devices */
+        @media (min-width: 481px) and (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .contact-info {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <div class="top-navbar">
+        <div class="container">
+            <div class="navbar-content">
+                <div class="navbar-logo" onclick="showPage('products')">
+                    <div class="navbar-logo-photo">
+                        <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=100&h=100&fit=crop" alt="לוגו החווה">
+                    </div>
+                    <div>
+                        <div>חנן הגנן</div>
+                        <div class="navbar-tagline">טרי מהשדות שלנו לשולחן שלכם</div>
+                    </div>
+                </div>
+                <nav class="top-nav">
+                    <ul>
+                        <li><a href="#" onclick="showPage('products')" class="nav-link active">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5M17 17a2 2 0 1 0 4 0 2 2 0 0 0-4 0zM9 17a2 2 0 1 0 4 0 2 2 0 0 0-4 0z"/>
+                            </svg>
+                            <span class="nav-text nav-text-full">המוצרים שלנו</span>
+                            <span class="nav-text nav-text-short">מוצרים</span>
+                        </a></li>
+                        <li><a href="#" onclick="showPage('contact')" class="nav-link">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                            </svg>
+                            <span class="nav-text nav-text-full">יצירת קשר ופרטים</span>
+                            <span class="nav-text nav-text-short">קשר</span>
+                        </a></li>
+                        <li><a href="#" onclick="showPage('about')" class="nav-link">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                <circle cx="12" cy="7" r="4"/>
+                            </svg>
+                            <span class="nav-text nav-text-full">אודותינו</span>
+                            <span class="nav-text nav-text-short">אודות</span>
+                        </a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header Carousel -->
+    <div class="header-background" id="headerBackground">
+        <div class="header-carousel">
+            <div class="header-slide active">
+                <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1200&h=600&fit=crop" alt="נוף החווה">
+                <div class="header-overlay"></div>
+            </div>
+            <div class="header-slide">
+                <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=1200&h=600&fit=crop" alt="ירקות טריים">
+                <div class="header-overlay"></div>
+            </div>
+            <div class="header-slide">
+                <img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=1200&h=600&fit=crop" alt="עבודה בשדה">
+                <div class="header-overlay"></div>
+            </div>
+            <div class="header-slide">
+                <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1200&h=600&fit=crop" alt="קציר">
+                <div class="header-overlay"></div>
+            </div>
+            <div class="header-slide">
+                <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=1200&h=600&fit=crop" alt="משפחת החווה">
+                <div class="header-overlay"></div>
+            </div>
+        </div>
+        
+        <div class="header-content">
+            <div class="header-logo">
+                <div class="header-logo-photo">
+                    <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=100&h=100&fit=crop" alt="לוגו החווה">
+                </div>
+                <div>חנן הגנן</div>
+            </div>
+            <div class="header-tagline">טרי מהשדות שלנו לשולחן שלכם</div>
+        </div>
+    </div>
+
+    <main class="container">
+        <!-- Products Page -->
+        <div id="products" class="page active">
+            <h1 class="page-title">הירקות הטריים שלנו</h1>
+            
+            <!-- Products Grid -->
+            <div class="products-container">
+                <div class="products-grid">
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?w=300&h=200&fit=crop" alt="ברוקולי">
+                        </div>
+                        <div class="product-name">🥦 ברוקולי</div>
+                        <div class="product-description">ברוקולי טרי וירוק עם ראשים צפופים ועשירים בויטמינים.</div>
+                        <div class="product-info-icon" onclick="showProductInfo('ברוקולי', 'ברוקולי טרי וירוק עם ראשים צפופים ועשירים בויטמינים. מושלם לבישול על קיטור, טיגון או אפייה. עשיר בויטמין C, K וסיבים תזונתיים. זמין: חורף - אביב', 'https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?w=300&h=200&fit=crop')">מידע</div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1551754655-cd27e38d2076?w=300&h=200&fit=crop" alt="תירס מתוק">
+                        </div>
+                        <div class="product-name">🌽 תירס מתוק</div>
+                        <div class="product-description">תירס מתוק וזהוב עם גרגירים עסיסיים ומתוקים.</div>
+                        <div class="product-info-icon" onclick="showProductInfo('תירס מתוק', 'תירס מתוק וזהוב עם גרגירים עסיסיים ומתוקים. מושלם לצלייה, בישול או אכילה ישירה מהקלח. עשיר בסיבים תזונתיים וויטמינים. זמין: קיץ - סתיו', 'https://images.unsplash.com/photo-1551754655-cd27e38d2076?w=300&h=200&fit=crop')">מידע</div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1508747703725-719777637510?w=300&h=200&fit=crop" alt="שקדים">
+                        </div>
+                        <div class="product-name">🌰 שקדים</div>
+                        <div class="product-description">שקדים טריים וטבעיים עשירים בחלבון ושמנים בריאים.</div>
+                        <div class="product-info-icon" onclick="showProductInfo('שקדים', 'שקדים טריים וטבעיים עשירים בחלבון ושמנים בריאים. מושלמים לנשנוש, אפייה או הכנת חלב שקדים. עשירים בויטמין E ומגנזיום. זמין: סתיו - חורף', 'https://images.unsplash.com/photo-1508747703725-719777637510?w=300&h=200&fit=crop')">מידע</div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1583663848850-46af132dc08e?w=300&h=200&fit=crop" alt="פלפלון">
+                        </div>
+                        <div class="product-name">🌶️ פלפלון</div>
+                        <div class="product-description">פלפלון מתוק וצבעוני עם טעם עדין ומרקם פריך.</div>
+                        <div class="product-info-icon" onclick="showProductInfo('פלפלון', 'פלפלון מתוק וצבעוני עם טעם עדין ומרקם פריך. מושלם לסלטים, טיגון או אכילה ישירה. עשיר בויטמין C ואנטיאוקסידנטים. זמין: קיץ - סתיו', 'https://images.unsplash.com/photo-1583663848850-46af132dc08e?w=300&h=200&fit=crop')">מידע</div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1546470427-e26264be0b0d?w=300&h=200&fit=crop" alt="עגבניות שרי">
+                        </div>
+                        <div class="product-name">🍅 עגבניות שרי</div>
+                        <div class="product-description">עגבניות שרי קטנות ומתוקות עם טעם מרוכז ועשיר.</div>
+                        <div class="product-info-icon" onclick="showProductInfo('עגבניות שרי', 'עגבניות שרי קטנות ומתוקות עם טעם מרוכז ועשיר. מושלמות לסלטים, נשנושים או קישוט מנות. עשירות בליקופן וויטמין C. זמין: קיץ - סתיו', 'https://images.unsplash.com/photo-1546470427-e26264be0b0d?w=300&h=200&fit=crop')">מידע</div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1583663848850-46af132dc08e?w=300&h=200&fit=crop" alt="פלפל חריף">
+                        </div>
+                        <div class="product-name">🌶️ פלפל חריף</div>
+                        <div class="product-description">פלפלים חריפים אדומים וירוקים להוספת חריפות למנות.</div>
+                        <div class="product-info-icon" onclick="showProductInfo('פלפל חריף', 'פלפלים חריפים אדומים וירוקים להוספת חריפות למנות. זנים שונים ברמות חריפות מגוונות. עשירים בקפסאיצין ובויטמין C. זמין: קיץ - סתיו', 'https://images.unsplash.com/photo-1583663848850-46af132dc08e?w=300&h=200&fit=crop')">מידע</div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1586367014640-7045f3d9c095?w=300&h=200&fit=crop" alt="צימוקים">
+                        </div>
+                        <div class="product-name">🍇 צימוקים</div>
+                        <div class="product-description">צימוקים מתוקים וטבעיים ללא תוספות סוכר או חומרים משמרים.</div>
+                        <div class="product-info-icon" onclick="showProductInfo('צימוקים', 'צימוקים מתוקים וטבעיים ללא תוספות סוכר או חומרים משמרים. מושלמים לאפייה, נשנושים או הוספה לדגנים. עשירים בברזל ואנטיאוקסידנטים. זמין: כל השנה', 'https://images.unsplash.com/photo-1586367014640-7045f3d9c095?w=300&h=200&fit=crop')">מידע</div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=300&h=200&fit=crop" alt="בצל">
+                        </div>
+                        <div class="product-name">🧅 בצל</div>
+                        <div class="product-description">בצל צהוב, אדום ולבן טרי וחריף. חיוני לכל מטבח.</div>
+                        <div class="product-info-icon" onclick="showProductInfo('בצל', 'בצל צהוב, אדום ולבן טרי וחריף. חיוני לכל מטבח. עשיר בויטמינים ומינרלים. מושלם לבישול, טיגון או אכילה חיה. זמין: כל השנה', 'https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=300&h=200&fit=crop')">מידע</div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1583663848850-46af132dc08e?w=300&h=200&fit=crop" alt="גמבה">
+                        </div>
+                        <div class="product-name">🌶️ גמבה</div>
+                        <div class="product-description">גמבה ירוקה טרייה עם מרקם ייחודי וטעם עדין.</div>
+                        <div class="product-info-icon" onclick="showProductInfo('גמבה', 'גמבה ירוקה טרייה עם מרקם ייחודי וטעם עדין. מושלמת לתבשילים, מרקים או טיגון. עשירה בסיבים תזונתיים וויטמינים. זמין: קיץ - סתיו', 'https://images.unsplash.com/photo-1583663848850-46af132dc08e?w=300&h=200&fit=crop')">מידע</div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1449300079323-02e209d9d3a6?w=300&h=200&fit=crop" alt="מלפפון בייבי">
+                        </div>
+                        <div class="product-name">🥒 מלפפון בייבי</div>
+                        <div class="product-description">מלפפוני בייבי קטנים ופריכים מושלמים לנשנושים וסלטים.</div>
+                        <div class="product-info-icon" onclick="showProductInfo('מלפפון בייבי', 'מלפפוני בייבי קטנים ופריכים מושלמים לנשנושים וסלטים. עם קליפה רכה וללא זרעים גדולים. עשירים במים וויטמינים. זמין: קיץ', 'https://images.unsplash.com/photo-1449300079323-02e209d9d3a6?w=300&h=200&fit=crop')">מידע</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Want to See More Card -->
+            <div class="want-more-section">
+                <div class="want-more-card">
+                    <h3>רוצים לראות עוד מהמגוון שלנו?</h3>
+                    <p>יש לנו עוד הרבה זנים וירקות עונתיים שלא מופיעים כאן. צרו קשר לפרטים נוספים!</p>
+                    <div class="contact-buttons">
+                        <button class="contact-btn email-btn" onclick="window.location.href='mailto:info@greenvalleyfarm.co.il'">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                            שלחו לנו מייל
+                        </button>
+                        <button class="contact-btn phone-btn" onclick="window.location.href='tel:050-123-4567'">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                            </svg>
+                            התקשרו אלינו
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Page -->
+        <div id="contact" class="page">
+            <h1 class="page-title">יצירת קשר ופרטי המוצרים</h1>
+            
+            <!-- Modern Contact Cards -->
+            <div class="modern-contact-grid">
+                <div class="modern-contact-card">
+                    <div class="contact-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                        </svg>
+                    </div>
+                    <h3>טלפון</h3>
+                    <p class="contact-main">050-123-4567</p>
+                    <p class="contact-sub">התקשרו אלינו להזמנות ולבדיקת זמינות</p>
+                </div>
+                
+                <div class="modern-contact-card">
+                    <div class="contact-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                            <polyline points="22,6 12,13 2,6"/>
+                        </svg>
+                    </div>
+                    <h3>אימייל</h3>
+                    <p class="contact-main">info@greenvalleyfarm.co.il</p>
+                    <p class="contact-sub">שלחו לנו את השאלות שלכם</p>
+                </div>
+                
+                <div class="modern-contact-card">
+                    <div class="contact-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12,6 12,12 16,14"/>
+                        </svg>
+                    </div>
+                    <h3>שעות פתיחה</h3>
+                    <p class="contact-main">ראשון - חמישי: 8:00 - 18:00</p>
+                    <p class="contact-sub">שישי: 8:00 - 14:00</p>
+                </div>
+                
+                <div class="modern-contact-card">
+                    <div class="contact-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                        </svg>
+                    </div>
+                    <h3>פייסבוק</h3>
+                    <p class="contact-main"><a href="https://facebook.com/greenvalleyfarm" target="_blank">חנן הגנן</a></p>
+                    <p class="contact-sub">עקבו אחרינו לעדכונים על הקציר</p>
+                </div>
+            </div>
+            
+            <!-- First Location -->
+            <div class="address-map-section">
+                <div class="address-card">
+                    <div class="address-header">
+                        <div class="address-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                        </div>
+                        <h3>החווה הראשית</h3>
+                    </div>
+                    <div class="address-content">
+                        <p class="address-main">רחוב החווה 123</p>
+                        <p class="address-main">העמק הירוק, ישראל</p>
+                        
+                        <div class="address-divider"></div>
+                        
+                        <div class="directions-section">
+                            <p>כאן אתם תמצאו את החווה המשפחתית שלנו עם השדות הפתוחים והחממות המודרניות. מקום שקט וירוק עם אווירה כפרית נעימה ומגוון רחב של ירקות טריים.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="map-container-modern">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3387.123456789!2d35.123456!3d32.123456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzLCsDA3JzI0LjQiTiAzNcKwMDcnMjQuNCJF!5e0!3m2!1siw!2sil!4v1234567890123!5m2!1siw!2sil"
+                        width="100%" 
+                        height="100%" 
+                        style="border:0; border-radius: 16px;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+
+            <!-- Second Location -->
+            <div class="address-map-section">
+                <div class="address-card">
+                    <div class="address-header">
+                        <div class="address-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M3 7v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2z"/>
+                                <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                            </svg>
+                        </div>
+                        <h3>דוכן השוק</h3>
+                    </div>
+                    <div class="address-content">
+                        <p class="address-main">שוק הכרמל 45</p>
+                        <p class="address-main">תל אביב, ישראל</p>
+                        
+                        <div class="address-divider"></div>
+                        
+                        <div class="directions-section">
+                            <p>הדוכן שלנו בלב שוק הכרמל התוסס. כאן תוכלו למצוא מבחר יומי של הירקות הטריים ביותר מהחווה, באווירה חמה ואישית של השוק המסורתי.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="map-container-modern">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3380.987654321!2d34.765432!3d32.065432!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzLCsDAzJzU1LjYiTiAzNMKwNDUnNTUuNiJF!5e0!3m2!1siw!2sil!4v1234567890124!5m2!1siw!2sil"
+                        width="100%" 
+                        height="100%" 
+                        height="100%" 
+                        style="border:0; border-radius: 16px;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+            
+            <!-- Want to Buy Section -->
+            <div class="order-section">
+                <h3>רוצים לקנות?</h3>
+                <div class="order-steps">
+                    <div class="order-step">
+                        <div class="contact-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                        </div>
+                        <h4>לקוחות</h4>
+                        <p>בקרו בדוכן החווה או בשוק הכרמל בשעות הפתיחה לרכישה ישירה</p>
+                    </div>
+                    <div class="order-step">
+                        <div class="contact-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                                <polyline points="3.27,6.96 12,12.01 20.73,6.96"/>
+                                <line x1="12" y1="22.08" x2="12" y2="12"/>
+                            </svg>
+                        </div>
+                        <h4>סוחרים</h4>
+                        <p>צרו קשר לפרטים על הזמנות סיטונאיות ומחירים מיוחדים לעסקים</p>
+                    </div>
+                    <div class="order-step">
+                        <div class="contact-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                                <line x1="1" y1="10" x2="23" y2="10"/>
+                            </svg>
+                        </div>
+                        <h4>דרכי תשלום</h4>
+                        <p>אנו מקבלים מזומן, המחאות, כרטיסי אשראי ותשלום דיגיטלי</p>
+                    </div>
+                </div>
+                <p class="availability-note">הזמינות עשויה להשתנות לפי העונה - התקשרו לוודא את הקציר הנוכחי</p>
+            </div>
+        </div>
+
+        <!-- About Page -->
+        <div id="about" class="page">
+            <h1 class="page-title">אודות חנן הגנן</h1>
+            
+            <!-- Introduction Section -->
+            <div class="about-content">
+                <div class="about-intro-section">
+                    <div class="about-intro-text">
+                        <p>ברוכים הבאים לחנן הגנן, שם אנו מגדלים ירקות טריים ואיכותיים כבר למעלה מ-30 שנה. החווה המשפחתית שלנו מוקדשת לספק לקהילה את התוצרת הטרייה ביותר תוך שימוש בשיטות חקלאות בר-קיימא.</p>
+                        
+                        <p>החווה נוסדה בשנת 1993 על ידי יוחנן ומרים כהן, והחלה כחלקת אדמה קטנה עם חלום גדול. מה שהתחיל כגינת תחביב גדל לחווה משגשגת של 50 דונם המספקת ירקות טריים למשפחות ברחבי האזור.</p>
+                        
+                        <p>אנו מאמינים בעבודה עם הטבע, לא נגדו. הירקות שלנו גדלים בשיטות טבעיות, קומפוסט עשיר ותשומת לב קפדנית לבריאות הקרקע.</p>
+                    </div>
+                    <div class="about-intro-image">
+                        <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=400&h=300&fit=crop" alt="נוף החווה">
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </main>
+
+    <!-- Product Info Modal -->
+    <div id="productModal" class="product-modal">
+        <div class="product-modal-content">
+            <span class="modal-close" onclick="closeProductModal()">&times;</span>
+            <h2 id="modalTitle" class="modal-title"></h2>
+            <div id="modalImage" class="modal-image"></div>
+            <p id="modalDescription" class="modal-description"></p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-image-section">
+                    <div class="footer-image">
+                        <span>תמונה</span>
+                    </div>
+                </div>
+                
+                <div class="footer-divider"></div>
+                
+                <div class="footer-text">
+                    <p>&copy; 2024 חנן הגנן. מגדלים ירקות טריים באהבה מאז 1993.</p>
+                </div>
+                
+                <div class="footer-divider"></div>
+                
+                <div class="footer-links">
+                    <a href="https://facebook.com/greenvalleyfarm" target="_blank" class="footer-link">
+                        <svg class="footer-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                        פייסבוק
+                    </a>
+                    
+                    <a href="mailto:info@greenvalleyfarm.co.il" class="footer-link">
+                        <svg class="footer-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                        </svg>
+                        אימייל
+                    </a>
+                    
+                    <a href="https://maps.google.com/?q=רחוב החווה 123, העמק הירוק, ישראל" target="_blank" class="footer-link">
+                        <svg class="footer-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                        </svg>
+                        כתובת
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let slideIndex = 1;
+        let productSlideIndex = 1;
+        let headerSlideIndex = 1;
+
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update navigation
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => link.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Scroll to top of navbar for non-products pages
+            if (pageId !== 'products') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // Header carousel functions
+        function changeHeaderSlide(n) {
+            showHeaderSlide(headerSlideIndex += n);
+        }
+
+        function showHeaderSlide(n) {
+            const slides = document.querySelectorAll('.header-slide');
+            
+            if (n > slides.length) { headerSlideIndex = 1; }
+            if (n < 1) { headerSlideIndex = slides.length; }
+            
+            // Hide all slides
+            slides.forEach(slide => slide.classList.remove('active'));
+            
+            // Show current slide
+            if (slides[headerSlideIndex - 1]) {
+                slides[headerSlideIndex - 1].classList.add('active');
+            }
+        }
+
+        // About page carousel functions
+        function changeSlide(n) {
+            showSlide(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlide(slideIndex = n);
+        }
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.carousel-slide');
+            const dots = document.querySelectorAll('.dot');
+            
+            if (n > slides.length) { slideIndex = 1; }
+            if (n < 1) { slideIndex = slides.length; }
+            
+            // Hide all slides
+            slides.forEach(slide => slide.classList.remove('active'));
+            
+            // Remove active from all dots
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            // Show current slide and activate corresponding dot
+            if (slides[slideIndex - 1]) {
+                slides[slideIndex - 1].classList.add('active');
+            }
+            if (dots[slideIndex - 1]) {
+                dots[slideIndex - 1].classList.add('active');
+            }
+        }
+
+        // Products carousel functions
+        function changeProductSlide(n) {
+            showProductSlide(productSlideIndex += n);
+        }
+
+        function currentProductSlide(n) {
+            showProductSlide(productSlideIndex = n);
+        }
+
+        function showProductSlide(n) {
+            const slides = document.querySelectorAll('.products-slide');
+            const dots = document.querySelectorAll('.page-dot');
+            
+            if (n > slides.length) { productSlideIndex = 1; }
+            if (n < 1) { productSlideIndex = slides.length; }
+            
+            // Hide all slides
+            slides.forEach(slide => slide.classList.remove('active'));
+            
+            // Remove active from all dots
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            // Show current slide and activate corresponding dot
+            if (slides[productSlideIndex - 1]) {
+                slides[productSlideIndex - 1].classList.add('active');
+            }
+            if (dots[productSlideIndex - 1]) {
+                dots[productSlideIndex - 1].classList.add('active');
+            }
+        }
+
+        // Auto-advance about page carousel every 5 seconds
+        setInterval(() => {
+            changeSlide(1);
+        }, 5000);
+
+        // Auto-advance products carousel every 7 seconds
+        setInterval(() => {
+            changeProductSlide(1);
+        }, 7000);
+
+        // Auto-advance header carousel every 4 seconds
+        setInterval(() => {
+            changeHeaderSlide(1);
+        }, 4000);
+
+        // Product modal functions
+        function showProductInfo(productName, productDescription, imageUrl) {
+            document.getElementById('modalTitle').textContent = productName;
+            document.getElementById('modalDescription').textContent = productDescription;
+            
+            const modalImage = document.getElementById('modalImage');
+            if (imageUrl && imageUrl !== 'placeholder') {
+                modalImage.innerHTML = `<img src="${imageUrl}" alt="${productName}">`;
+            } else {
+                modalImage.innerHTML = `<span>הוסף כאן תמונה של ${productName}</span>`;
+            }
+            
+            document.getElementById('productModal').style.display = 'block';
+        }
+
+        function closeProductModal() {
+            document.getElementById('productModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('productModal');
+            if (event.target == modal) {
+                closeProductModal();
+            }
+        }
+
+
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'971b68c110817d95',t:'MTc1NTYyNDk0NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
