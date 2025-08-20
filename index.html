@@ -123,6 +123,13 @@
             margin-top: 75px;
         }
 
+        /* Desktop - 10% taller header */
+        @media (min-width: 769px) {
+            .header-background {
+                height: 60vh;
+            }
+        }
+
         .header-carousel {
             position: relative;
             width: 100%;
@@ -130,14 +137,15 @@
         }
 
         .header-slide {
-            display: none;
+            position: absolute;
             width: 100%;
             height: 100%;
-            position: relative;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
         }
 
         .header-slide.active {
-            display: block;
+            opacity: 1;
         }
 
         .header-slide img {
@@ -152,7 +160,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(74, 103, 65, 0.7);
+            background: transparent;
             z-index: 1;
         }
 
@@ -174,6 +182,34 @@
             align-items: center;
             justify-content: center;
             gap: 30px;
+        }
+
+        /* Desktop-only header layout */
+        @media (min-width: 769px) {
+            .header-logo {
+                flex-direction: row-reverse;
+                align-items: center;
+                gap: 40px;
+            }
+            
+            .header-text-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                order: 1;
+            }
+            
+            .header-logo-photo {
+                order: 2;
+            }
+            
+            .header-main-text {
+                font-size: 72px;
+                font-weight: bold;
+                line-height: 1;
+                margin-bottom: 5px;
+            }
         }
 
         .header-logo-photo {
@@ -203,6 +239,14 @@
             opacity: 0.9;
             font-style: italic;
             margin-bottom: 30px;
+        }
+
+        /* Desktop-only tagline styling */
+        @media (min-width: 769px) {
+            .header-tagline {
+                margin-bottom: 0;
+                font-size: 20px;
+            }
         }
 
         .header-contact-btn {
@@ -1669,7 +1713,7 @@
             .header-logo {
                 font-size: clamp(32px, 8vw, 48px);
                 gap: clamp(12px, 3vw, 20px);
-                flex-direction: column;
+                flex-direction: column-reverse;
                 align-items: center;
             }
 
@@ -2538,35 +2582,33 @@
     <div class="header-background" id="headerBackground">
         <div class="header-carousel">
             <div class="header-slide active">
-                <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1200&h=600&fit=crop" alt="נוף החווה">
+                <img src="images/tractorHarvest.png" alt="נוף החווה">
                 <div class="header-overlay"></div>
             </div>
-            <div class="header-slide">
-                <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=1200&h=600&fit=crop" alt="ירקות טריים">
+            <div class="header-slide active">
+                <img src="images/almondTrees.png" alt="נוף החווה">
                 <div class="header-overlay"></div>
             </div>
-            <div class="header-slide">
-                <img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=1200&h=600&fit=crop" alt="עבודה בשדה">
+             <div class="header-slide active">
+                <img src="images/tractors.png" alt="נוף החווה">
                 <div class="header-overlay"></div>
             </div>
-            <div class="header-slide">
-                <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1200&h=600&fit=crop" alt="קציר">
-                <div class="header-overlay"></div>
-            </div>
-            <div class="header-slide">
-                <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=1200&h=600&fit=crop" alt="משפחת החווה">
+            <div class="header-slide active">
+                <img src="images/tractor.png" alt="נוף החווה">
                 <div class="header-overlay"></div>
             </div>
         </div>
         
         <div class="header-content">
             <div class="header-logo">
+                <div class="header-text-container">
+                    <div class="header-main-text">חנן הגנן</div>
+                    <div class="header-tagline">טרי מהשדות שלנו לשולחן שלכם</div>
+                </div>
                 <div class="header-logo-photo">
                     <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=100&h=100&fit=crop" alt="לוגו החווה">
                 </div>
-                <div>חנן הגנן</div>
             </div>
-            <div class="header-tagline">טרי מהשדות שלנו לשולחן שלכם</div>
         </div>
     </div>
 
@@ -2673,17 +2715,17 @@
             <!-- Want to See More Card -->
             <div class="want-more-section">
                 <div class="want-more-card">
-                    <h3>רוצים לראות עוד מהמגוון שלנו?</h3>
+                    <h3>מעוניינים לשמוע עוד?</h3>
                     <p>יש לנו עוד הרבה זנים וירקות עונתיים שלא מופיעים כאן. צרו קשר לפרטים נוספים!</p>
                     <div class="contact-buttons">
-                        <button class="contact-btn email-btn" onclick="window.location.href='mailto:info@greenvalleyfarm.co.il'">
+                        <button class="contact-btn email-btn" onclick="window.location.href='mailto:blashar@bezeqint.net'">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
                                 <polyline points="22,6 12,13 2,6"/>
                             </svg>
                             שלחו לנו מייל
                         </button>
-                        <button class="contact-btn phone-btn" onclick="window.location.href='tel:050-123-4567'">
+                        <button class="contact-btn phone-btn" onclick="window.location.href='tel:+972587712208'">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
                             </svg>
@@ -2696,7 +2738,7 @@
 
         <!-- Contact Page -->
         <div id="contact" class="page">
-            <h1 class="page-title">יצירת קשר ופרטי המוצרים</h1>
+            <h1 class="page-title">יצירת קשר ופרטים נוספים</h1>
             
             <!-- Modern Contact Cards -->
             <div class="modern-contact-grid">
@@ -2707,7 +2749,7 @@
                         </svg>
                     </div>
                     <h3>טלפון</h3>
-                    <p class="contact-main">050-123-4567</p>
+                    <p class="contact-main">058-771-2208</p>
                     <p class="contact-sub">התקשרו אלינו להזמנות ולבדיקת זמינות</p>
                 </div>
                 
@@ -2719,8 +2761,8 @@
                         </svg>
                     </div>
                     <h3>אימייל</h3>
-                    <p class="contact-main">info@greenvalleyfarm.co.il</p>
-                    <p class="contact-sub">שלחו לנו את השאלות שלכם</p>
+                    <p class="contact-main">blashar@bezeqint.net</p>
+                    <p class="contact-sub">לפניות ושאלות במייל</p>
                 </div>
                 
                 <div class="modern-contact-card">
@@ -2730,9 +2772,9 @@
                             <polyline points="12,6 12,12 16,14"/>
                         </svg>
                     </div>
-                    <h3>שעות פתיחה</h3>
-                    <p class="contact-main">ראשון - חמישי: 8:00 - 18:00</p>
-                    <p class="contact-sub">שישי: 8:00 - 14:00</p>
+                    <h3>שעות פתיחה של החנות</h3>
+                    <p class="contact-main">ראשון - חמישי: 8:00 - 16:00</p>
+                    <p class="contact-sub">שישי: 14:00 - 7:00</p>
                 </div>
                 
                 <div class="modern-contact-card">
@@ -2742,8 +2784,8 @@
                         </svg>
                     </div>
                     <h3>פייסבוק</h3>
-                    <p class="contact-main"><a href="https://facebook.com/greenvalleyfarm" target="_blank">חנן הגנן</a></p>
-                    <p class="contact-sub">עקבו אחרינו לעדכונים על הקציר</p>
+                    <p class="contact-main"><a href="https://facebook.com/hananhaganan2020" target="_blank">חנן הגנן משק בלשר</a></p>
+                    <p class="contact-sub">עקבו אחרינו והשארו מעודכנים</p>
                 </div>
             </div>
             
@@ -2757,24 +2799,23 @@
                                 <circle cx="12" cy="10" r="3"/>
                             </svg>
                         </div>
-                        <h3>החווה הראשית</h3>
+                        <h3>משק בלשר</h3>
                     </div>
                     <div class="address-content">
-                        <p class="address-main">רחוב החווה 123</p>
-                        <p class="address-main">העמק הירוק, ישראל</p>
+                        <p class="address-main">מושב סגולה</p>
+                        <p class="address-main">דרך הגורן, 38</p>
                         
                         <div class="address-divider"></div>
                         
                         <div class="directions-section">
-                            <p>כאן אתם תמצאו את החווה המשפחתית שלנו עם השדות הפתוחים והחממות המודרניות. מקום שקט וירוק עם אווירה כפרית נעימה ומגוון רחב של ירקות טריים.</p>
+                            <p>המקום בו הקסם מתרחש. מזריעה ועד אריזת ירקות טריים</p>
                         </div>
                     </div>
                 </div>
                 
                 <div class="map-container-modern">
                     <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3387.123456789!2d35.123456!3d32.123456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzLCsDA3JzI0LjQiTiAzNcKwMDcnMjQuNCJF!5e0!3m2!1siw!2sil!4v1234567890123!5m2!1siw!2sil"
-                        width="100%" 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3395.6964385713973!2d34.78000952405484!3d31.66952383975731!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1502942bb0234831%3A0x2082d2f97500fa0a!2z15PXqNeaINeU15LXldeo158gMzgsINeh15LXldec15QsIDc5NTMwMDA!5e0!3m2!1siw!2sil!4v1755722163448!5m2!1siw!2sil"                         width="100%" 
                         height="100%" 
                         style="border:0; border-radius: 16px;" 
                         allowfullscreen="" 
@@ -2797,21 +2838,20 @@
                         <h3>דוכן השוק</h3>
                     </div>
                     <div class="address-content">
-                        <p class="address-main">שוק הכרמל 45</p>
-                        <p class="address-main">תל אביב, ישראל</p>
+                        <p class="address-main">הרצליה</p>
+                        <p class="address-main">כנפי נשרים, 99</p>
                         
                         <div class="address-divider"></div>
                         
                         <div class="directions-section">
-                            <p>הדוכן שלנו בלב שוק הכרמל התוסס. כאן תוכלו למצוא מבחר יומי של הירקות הטריים ביותר מהחווה, באווירה חמה ואישית של השוק המסורתי.</p>
+                            <p>במתחם כנפי נשרים תוכלו להנות מהתוצרת שלנו ישירות מהחקלאי. המתחם נמצא בשיתוף עם משווק שוורצבג ומאגד בו שלל תוצרת חקלאית טרייה ישירות מהחקלאים</p>
                         </div>
                     </div>
                 </div>
                 
-                <div class="map-container-modern">
+                <div class="map-container-modern"> 
                     <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3380.987654321!2d34.765432!3d32.065432!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzLCsDAzJzU1LjYiTiAzNMKwNDUnNTUuNiJF!5e0!3m2!1siw!2sil!4v1234567890124!5m2!1siw!2sil"
-                        width="100%" 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2334.5862508369823!2d34.84065959455359!3d32.179775296033185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151d471803ea14df%3A0x5b03461aa201240f!2z157XqdenINep15XXldeo16bXkdeo15I!5e0!3m2!1siw!2sil!4v1755722294859!5m2!1siw!2sil"                        width="100%" 
                         height="100%" 
                         height="100%" 
                         style="border:0; border-radius: 16px;" 
@@ -2824,7 +2864,7 @@
             
             <!-- Want to Buy Section -->
             <div class="order-section">
-                <h3>רוצים לקנות?</h3>
+                <h3>מעוניינים לקנות?</h3>
                 <div class="order-steps">
                     <div class="order-step">
                         <div class="contact-icon">
@@ -2836,7 +2876,7 @@
                             </svg>
                         </div>
                         <h4>לקוחות</h4>
-                        <p>בקרו בדוכן החווה או בשוק הכרמל בשעות הפתיחה לרכישה ישירה</p>
+                        <p>ניתן להגיע גם לחנות וגם למשק עצמו</p>
                     </div>
                     <div class="order-step">
                         <div class="contact-icon">
@@ -2847,7 +2887,7 @@
                             </svg>
                         </div>
                         <h4>סוחרים</h4>
-                        <p>צרו קשר לפרטים על הזמנות סיטונאיות ומחירים מיוחדים לעסקים</p>
+                        <p>צרו קשר לקבלת מידע נוסף על הזמנות והובלות</p>
                     </div>
                     <div class="order-step">
                         <div class="contact-icon">
@@ -2860,7 +2900,7 @@
                         <p>אנו מקבלים מזומן, המחאות, כרטיסי אשראי ותשלום דיגיטלי</p>
                     </div>
                 </div>
-                <p class="availability-note">הזמינות עשויה להשתנות לפי העונה - התקשרו לוודא את הקציר הנוכחי</p>
+                <p class="availability-note">הזמינות עשויה להשתנות לפי העונה - התקשרו לוודא את התוצרת הנוכחי</p>
             </div>
         </div>
 
@@ -2879,7 +2919,7 @@
                         <p>אנו מאמינים בעבודה עם הטבע, לא נגדו. הירקות שלנו גדלים בשיטות טבעיות, קומפוסט עשיר ותשומת לב קפדנית לבריאות הקרקע.</p>
                     </div>
                     <div class="about-intro-image">
-                        <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=400&h=300&fit=crop" alt="נוף החווה">
+                        <img src="images/cornField.png" alt="נוף החווה">
                     </div>
                 </div>
             </div>
@@ -2903,34 +2943,34 @@
             <div class="footer-content">
                 <div class="footer-image-section">
                     <div class="footer-image">
-                        <span>תמונה</span>
+                        <img src="images/hananLogo.jpg" />
                     </div>
                 </div>
                 
                 <div class="footer-divider"></div>
                 
                 <div class="footer-text">
-                    <p>&copy; 2024 חנן הגנן. מגדלים ירקות טריים באהבה מאז 1993.</p>
+                    <p>&copy; חנן הגנן משק בלשר בע"מ </p>
                 </div>
                 
                 <div class="footer-divider"></div>
                 
                 <div class="footer-links">
-                    <a href="https://facebook.com/greenvalleyfarm" target="_blank" class="footer-link">
+                    <a href="https://facebook.com/hananhaganan2020" target="_blank" class="footer-link">
                         <svg class="footer-icon" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                         </svg>
                         פייסבוק
                     </a>
                     
-                    <a href="mailto:info@greenvalleyfarm.co.il" class="footer-link">
+                    <a href="mailto:blashar@bezeqint.net" class="footer-link">
                         <svg class="footer-icon" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
                         </svg>
                         אימייל
                     </a>
                     
-                    <a href="https://maps.google.com/?q=רחוב החווה 123, העמק הירוק, ישראל" target="_blank" class="footer-link">
+                    <a href="https://maps.google.com/?q=דרך הגורן 38 סגולה" target="_blank" class="footer-link">
                         <svg class="footer-icon" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
                         </svg>
@@ -3057,10 +3097,10 @@
             changeProductSlide(1);
         }, 7000);
 
-        // Auto-advance header carousel every 4 seconds
+        // Auto-advance header carousel every 15 seconds
         setInterval(() => {
             changeHeaderSlide(1);
-        }, 4000);
+        }, 15000);
 
         // Product modal functions
         function showProductInfo(productName, productDescription, imageUrl) {
@@ -3091,5 +3131,5 @@
 
 
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'971b68c110817d95',t:'MTc1NTYyNDk0NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'972474c6d0c835c6',t:'MTc1NTcxOTgwOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
